@@ -27,6 +27,10 @@ resource "aws_launch_configuration" "ec2_launch_config" {
   iam_instance_profile        = "${var.lc_instance_profile}"
 }
 
+lifecycle {
+  create_before_destroy = true
+}
+
 output "lc_name" {
   value = "${aws_launch_configuration.ec2_launch_config.name}"
 }
@@ -50,6 +54,10 @@ resource "aws_autoscaling_group" "ec2_autoscaling_group" {
   default_cooldown          = "${var.asg_default_cooldown}"
   launch_configuration      = "${aws_launch_configuration.ec2_launch_config.name}"
   vpc_zone_identifier       = "${var.asg_vpc_zone_identifier}"
+
+  lifecycle {
+    create_before_destroy = true
+  }
 
   tag {
     key                 = "${var.asg_tag_key}"
