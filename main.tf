@@ -1,8 +1,3 @@
-provider "aws" {
-  region = "${var.aws_region}"
-}
-
-
 ## A note on using launch config resources with auto-scaling groups
 ## https://www.terraform.io/docs/providers/aws/r/launch_configuration.html
 ## TL;DR assigning this lc_name_prefix var will make life better in the future.
