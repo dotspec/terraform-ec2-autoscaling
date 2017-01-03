@@ -25,11 +25,13 @@ resource "aws_launch_configuration" "ec2_launch_config" {
   ebs_optimized               = "${var.lc_ebs_optimized}"
   user_data                   = "${var.lc_user_data}"
   iam_instance_profile        = "${var.lc_instance_profile}"
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
-lifecycle {
-  create_before_destroy = true
-}
+
 
 output "lc_name" {
   value = "${aws_launch_configuration.ec2_launch_config.name}"
