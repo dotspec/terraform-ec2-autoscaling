@@ -20,7 +20,7 @@ resource "aws_launch_configuration" "ec2_launch_config" {
   image_id                    = "${var.lc_image_id}"
   instance_type               = "${var.lc_instance_type}"
   key_name                    = "${var.lc_key_name}"
-  security_groups             = "${var.lc_sec_groups}"
+  security_groups             = [ "${var.lc_sec_groups}" ]
   associate_public_ip_address = "${var.lc_associate_public_ip_address}"
   ebs_optimized               = "${var.lc_ebs_optimized}"
   user_data                   = "${var.lc_user_data}"
