@@ -52,7 +52,7 @@ variable "asg_tag_value" { default = "" }
 resource "aws_autoscaling_group" "ec2_autoscaling_group" {
   min_size                  = "${var.asg_min_size}"
   max_size                  = "${var.asg_max_size}"
-  availability_zones        = "${var.asg_availability_zones}"
+  availability_zones        = ["${var.asg_availability_zones}"]
   default_cooldown          = "${var.asg_default_cooldown}"
   launch_configuration      = "${aws_launch_configuration.ec2_launch_config.name}"
   vpc_zone_identifier       = ["${var.asg_vpc_zone_identifier}"]
