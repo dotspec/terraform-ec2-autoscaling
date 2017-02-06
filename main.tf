@@ -55,7 +55,7 @@ resource "aws_autoscaling_group" "ec2_autoscaling_group" {
   availability_zones        = "${var.asg_availability_zones}"
   default_cooldown          = "${var.asg_default_cooldown}"
   launch_configuration      = "${aws_launch_configuration.ec2_launch_config.name}"
-  vpc_zone_identifier       = "${var.asg_vpc_zone_identifier}"
+  vpc_zone_identifier       = ["${var.asg_vpc_zone_identifier}"]
 
   lifecycle {
     create_before_destroy = true
