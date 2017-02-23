@@ -46,6 +46,7 @@ variable "asg_default_cooldown" { default = 300 }
 variable "asg_vpc_zone_identifier" { type = "list" }
 variable "asg_tag_key" { default = "" }
 variable "asg_tag_value" { default = "" }
+variable "protect_from_scale_in" { default = false }
 
 ## And then build me an Autoscaling Group
 
@@ -56,6 +57,7 @@ resource "aws_autoscaling_group" "ec2_autoscaling_group" {
   default_cooldown          = "${var.asg_default_cooldown}"
   launch_configuration      = "${aws_launch_configuration.ec2_launch_config.name}"
   vpc_zone_identifier       = ["${var.asg_vpc_zone_identifier}"]
+  protect_from_scale_in     = "${var.protect_from_scale_in}"
 
   lifecycle {
     create_before_destroy = true
@@ -64,6 +66,12 @@ resource "aws_autoscaling_group" "ec2_autoscaling_group" {
   tag {
     key                 = "${var.asg_tag_key}"
     value               = "${var.asg_tag_value}"
+    propagate_at_launch = true
+  }
+
+  tags {
+    key                 = "Name"
+    value               = "${var.lc_name_prefix}"
     propagate_at_launch = true
   }
 }
