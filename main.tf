@@ -69,7 +69,7 @@ resource "aws_autoscaling_group" "ec2_autoscaling_group" {
     propagate_at_launch = true
   }
 
-  tags {
+  tag {
     key                 = "Name"
     value               = "${var.lc_name_prefix}"
     propagate_at_launch = true
